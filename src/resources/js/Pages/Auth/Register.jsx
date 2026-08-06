@@ -7,7 +7,8 @@ import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -23,72 +24,121 @@ export default function Register() {
 
     return (
         <GuestLayout>
-            <Head title="Register" />
+            <Head title="Регистрация" />
 
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
+            <div className="mb-6 text-center">
+                <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+                    Создать аккаунт
+                </h1>
+                <p className="mt-2 text-sm text-slate-500">
+                    Заполните данные для регистрации в системе
+                </p>
+            </div>
 
-                    <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
-                    />
+            <form onSubmit={submit} className="space-y-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                        <InputLabel
+                            htmlFor="first_name"
+                            value="Имя"
+                            className="text-xs font-semibold uppercase tracking-wider text-slate-500"
+                        />
 
-                    <InputError message={errors.name} className="mt-2" />
+                        <TextInput
+                            id="first_name"
+                            name="first_name"
+                            placeholder="Иван"
+                            value={data.first_name}
+                            className="mt-1.5 block w-full rounded-2xl border-slate-200 bg-slate-50/50 p-3.5 text-sm font-medium placeholder-slate-400 transition focus:border-indigo-600 focus:bg-white focus:ring-4 focus:ring-indigo-600/10"
+                            autoComplete="given-name"
+                            isFocused={true}
+                            onChange={(e) => setData('first_name', e.target.value)}
+                            required
+                        />
+
+                        <InputError message={errors.first_name} className="mt-1.5" />
+                    </div>
+
+                    <div>
+                        <InputLabel
+                            htmlFor="last_name"
+                            value="Фамилия"
+                            className="text-xs font-semibold uppercase tracking-wider text-slate-500"
+                        />
+
+                        <TextInput
+                            id="last_name"
+                            name="last_name"
+                            placeholder="Иванов"
+                            value={data.last_name}
+                            className="mt-1.5 block w-full rounded-2xl border-slate-200 bg-slate-50/50 p-3.5 text-sm font-medium placeholder-slate-400 transition focus:border-indigo-600 focus:bg-white focus:ring-4 focus:ring-indigo-600/10"
+                            autoComplete="family-name"
+                            onChange={(e) => setData('last_name', e.target.value)}
+                            required
+                        />
+
+                        <InputError message={errors.last_name} className="mt-1.5" />
+                    </div>
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+                <div>
+                    <InputLabel
+                        htmlFor="email"
+                        value="Email"
+                        className="text-xs font-semibold uppercase tracking-wider text-slate-500"
+                    />
 
                     <TextInput
                         id="email"
                         type="email"
                         name="email"
+                        placeholder="name@example.com"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="mt-1.5 block w-full rounded-2xl border-slate-200 bg-slate-50/50 p-3.5 text-sm font-medium placeholder-slate-400 transition focus:border-indigo-600 focus:bg-white focus:ring-4 focus:ring-indigo-600/10"
                         autoComplete="username"
                         onChange={(e) => setData('email', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError message={errors.email} className="mt-1.5" />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                <div>
+                    <InputLabel
+                        htmlFor="password"
+                        value="Пароль"
+                        className="text-xs font-semibold uppercase tracking-wider text-slate-500"
+                    />
 
                     <TextInput
                         id="password"
                         type="password"
                         name="password"
+                        placeholder="********"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="mt-1.5 block w-full rounded-2xl border-slate-200 bg-slate-50/50 p-3.5 text-sm font-medium placeholder-slate-400 transition focus:border-indigo-600 focus:bg-white focus:ring-4 focus:ring-indigo-600/10"
                         autoComplete="new-password"
                         onChange={(e) => setData('password', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError message={errors.password} className="mt-1.5" />
                 </div>
 
-                <div className="mt-4">
+                <div>
                     <InputLabel
                         htmlFor="password_confirmation"
-                        value="Confirm Password"
+                        value="Подтвердите пароль"
+                        className="text-xs font-semibold uppercase tracking-wider text-slate-500"
                     />
 
                     <TextInput
                         id="password_confirmation"
                         type="password"
                         name="password_confirmation"
+                        placeholder="********"
                         value={data.password_confirmation}
-                        className="mt-1 block w-full"
+                        className="mt-1.5 block w-full rounded-2xl border-slate-200 bg-slate-50/50 p-3.5 text-sm font-medium placeholder-slate-400 transition focus:border-indigo-600 focus:bg-white focus:ring-4 focus:ring-indigo-600/10"
                         autoComplete="new-password"
                         onChange={(e) =>
                             setData('password_confirmation', e.target.value)
@@ -98,21 +148,27 @@ export default function Register() {
 
                     <InputError
                         message={errors.password_confirmation}
-                        className="mt-2"
+                        className="mt-1.5"
                     />
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
+                <div className="pt-2">
+                    <PrimaryButton
+                        className="w-full justify-center rounded-2xl bg-indigo-600 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700 active:scale-98 disabled:opacity-50"
+                        disabled={processing}
+                    >
+                        Зарегистрироваться
+                    </PrimaryButton>
+                </div>
+
+                <div className="pt-2 text-center">
+                    <label className="text-xs font-semibold text-slate-500 hover:text-indigo-600 transition">Уже есть аккаунт? </label>
                     <Link
                         href={route('login')}
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="text-xs font-semibold text-indigo-600 hover:underline"
                     >
-                        Already registered?
+                        Войти
                     </Link>
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Register
-                    </PrimaryButton>
                 </div>
             </form>
         </GuestLayout>

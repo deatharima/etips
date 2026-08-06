@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string('phone')->unique()->nullable();
             $table->date('birth_date')->nullable();
 
+            $table->uuid('employee_qr_token')
+                ->nullable()
+                ->unique();
+
+
             $table->string('avatar_path')->nullable();
 
             $table->enum('role', ['admin', 'manager', 'employee'])->default('employee');

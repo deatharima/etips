@@ -28,7 +28,7 @@ return new class extends Migration
 
             $table->text('working_hours')->nullable();
 
-            $table->enum('payment_provider', ['freedom_pay', 'kaspi', 'paybox']);
+            $table->enum('payment_provider', ['kaspi', 'halyk', 'jusan', 'freedom']);
             $table->string('payment_public_key')->nullable();
             $table->string('payment_secret_key')->nullable();
 

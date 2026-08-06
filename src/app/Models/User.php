@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'role',
     'email',
     'password',
+    'employee_qr_token',
 ])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
@@ -63,7 +64,12 @@ class User extends Authenticatable
 
     public function branches(): BelongsToMany
     {
-        return $this->belongsToMany(VenueBranch::class, 'branch_employees')
+        return $this->belongsToMany(
+            VenueBranch::class,
+            'branch_employees',
+            'user_id',
+            'branch_id'
+        )
             ->withPivot([
                 'position',
                 'is_active',
